@@ -1,0 +1,52 @@
+<%- include('partials/header', { title: startup.name }) %>
+<section class="public-page">
+  <div class="public-hero">
+    <h1><%= startup.name %></h1>
+    <p><%= startup.headline %></p>
+    <p class="muted"><%= startup.subheadline %></p>
+  </div>
+  <form action="/u/<%= slug %>/signup" method="post" class="form-grid public-form">
+    <label>
+      Email
+      <input type="email" name="email" required placeholder="you@example.com" />
+    </label>
+
+    <% startup.validation_questions.forEach((question, index) => { %>
+      <fieldset>
+        <legend><%= question.question %></legend>
+        <% if (question.type === 'scale_1_5') { %>
+          <div class="option-row">
+            <% question.options.forEach((option) => { %>
+              <label><input type="radio" name="<%= question.id %>" value="<%= option %>" required /> <%= option %></label>
+            <% }) %>
+          </div>
+        <% } else if (question.type === 'multiple_choice' || question.type === 'willingness_to_pay') { %>
+          <div class="option-row">
+            <% question.options.forEach((option) => { %>
+              <label><input type="radio" name="<%= question.id %>" value="<%= option %>" required /> <%= option %></label>
+            <% }) %>
+          </div>
+        <% } else { %>
+          <textarea name="<%= question.id %>" rows="3" required></textarea>
+        <% } %>
+      </fieldset>
+    <% }) %>
+
+    <% if (startup.price_test_variants.length) { %>
+      <fieldset>
+        <legend>Which price point would you be most likely to pay?</legend>
+        <div class="option-row">
+          <% startup.price_test_variants.forEach((price, idx) => { %>
+            <label><input type="radio" name="price_variant_shown" value="<%= idx %>" required /> $<%= price %></label>
+          <% }) %>
+        </div>
+      </fieldset>
+    <% } %>
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="converted_at_price" /> Yes, I would pay this price
+    </label>
+    <button type="submit">Join the waitlist</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

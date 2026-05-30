@@ -1,0 +1,16 @@
+<%- include('partials/header', { title: 'Founder onboarding' }) %>
+<section class="card">
+  <h1>LaunchProof Founder Onboarding</h1>
+  <p>Start with one sentence that describes your idea. Free to get started.</p>
+  <form action="/startup" method="post" class="form-grid">
+    <label>
+      Your idea
+      <textarea name="idea" rows="4" required placeholder="In one sentence, what are you building?"></textarea>
+    </label>
+    <button type="submit">Create validation project</button>
+  </form>
+  <p style="text-align: center; margin-top: 20px; color: #94a3b8; font-size: 0.95rem;">
+    <a href="/pricing">View pricing plans</a> • Free tier includes 100 signups, 1 project, and validation questions
+  </p>
+</section>
+<%- include('partials/footer') %>

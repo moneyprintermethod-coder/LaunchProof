@@ -1,0 +1,18 @@
+<%- include('partials/header', { title: 'Live page' }) %>
+<section class="card">
+  <h1>Your validation page is live</h1>
+  <p>Share this link with early visitors and start collecting real signal.</p>
+  <div class="notice">
+    <p><strong>Public URL</strong></p>
+    <p><a href="<%= publicUrl %>"><%= publicUrl %></a></p>
+  </div>
+  <div class="summary">
+    <h2><%= startup.name %></h2>
+    <p><%= startup.headline %></p>
+    <p><%= startup.subheadline %></p>
+    <p>Validation questions: <%= startup.validation_questions.length %></p>
+    <p>Price variants: <%= startup.price_test_variants.join(', ') || 'none' %></p>
+  </div>
+  <a class="button" href="/startup/<%= startup.id %>/dashboard">Go to dashboard</a>
+</section>
+<%- include('partials/footer') %>

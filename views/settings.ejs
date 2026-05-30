@@ -1,0 +1,74 @@
+<%- include('partials/header', { title: 'Settings' }) %>
+<section class="settings-page">
+  <div class="settings-container">
+    <h1>Settings</h1>
+    
+    <% if (typeof query !== 'undefined' && query.upgraded) { %>
+      <div class="notice success">
+        <p>✓ Your subscription has been updated successfully.</p>
+      </div>
+    <% } %>
+
+    <div class="settings-panel">
+      <h2>Subscription</h2>
+      <dl>
+        <dt>Current plan</dt>
+        <dd><strong><%= tierInfo.name %></strong></dd>
+        
+        <dt>Projects</dt>
+        <dd><%= tierInfo.features.max_projects === 999 ? 'Unlimited' : tierInfo.features.max_projects %></dd>
+        
+        <dt>Signups included</dt>
+        <dd><%= tierInfo.features.max_signups === 999999 ? 'Unlimited' : tierInfo.features.max_signups.toLocaleString() %></dd>
+      </dl>
+
+      <h3>Upgrade your plan</h3>
+      <% Object.entries(allTiers).forEach(([tierKey, tier]) => { %>
+        <% if (tierKey !== tier.name.toLowerCase() && tier.price_monthly > 0) { %>
+          <form action="/startup/<%= startup.id %>/upgrade" method="post" class="inline-form">
+            <input type="hidden" name="tier" value="<%= tierKey %>" />
+            <input type="hidden" name="billing_period" value="monthly" />
+            <button type="submit">Upgrade to <%= tier.name %> ($<%= tier.price_monthly %>/mo)</button>
+          </form>
+        <% } %>
+      <% }) %>
+    </div>
+
+    <div class="settings-panel">
+      <h2>Project</h2>
+      <dl>
+        <dt>Project name</dt>
+        <dd><%= startup.name %></dd>
+        
+        <dt>Public URL</dt>
+        <dd><a href="/u/<%= startup.slug %>" target="_blank">launchproof.local/u/<%= startup.slug %></a></dd>
+        
+        <dt>Validation questions</dt>
+        <dd><%= startup.validation_questions.length %> question<%= startup.validation_questions.length !== 1 ? 's' : '' %></dd>
+      </dl>
+
+      <% if (tierInfo.features.csv_export) { %>
+        <h3>Export</h3>
+        <a class="button secondary" href="/startup/<%= startup.id %>/export">Download high-intent CSV</a>
+      <% } else { %>
+        <p class="muted"><em>CSV export is available on Builder and Founder plans.</em></p>
+      <% } %>
+    </div>
+
+    <div class="settings-panel">
+      <h2>Features available on your plan</h2>
+      <ul>
+        <% Object.entries(tierInfo.features).forEach(([featureKey, enabled]) => { %>
+          <% if (typeof enabled === 'boolean') { %>
+            <li><%= enabled ? '✓' : '✗' %> <%= featureKey.replace(/_/g, ' ') %></li>
+          <% } %>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="settings-actions">
+      <a class="button primary" href="/startup/<%= startup.id %>/dashboard">Back to dashboard</a>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>

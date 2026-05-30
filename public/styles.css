@@ -1,0 +1,390 @@
+:root {
+  color-scheme: dark;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, rgba(96, 165, 250, 0.15), transparent 30%), #0f172a;
+}
+
+.app-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-header,
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.brand {
+  color: #f8fafc;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.card,
+.public-page,
+.dashboard-grid {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 24px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.card h1,
+.card h2,
+.public-page h1 {
+  margin-top: 0;
+}
+
+.form-grid {
+  display: grid;
+  gap: 16px;
+}
+
+label,
+fieldset {
+  display: block;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #cbd5e1;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='number'],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 14px;
+  background: #111827;
+  color: #e2e8f0;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='number']:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+}
+
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 14px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+button:hover,
+.button:hover {
+  background: #2563eb;
+}
+
+.checkbox-field,
+.checkbox-label {
+  margin-bottom: 10px;
+}
+
+.option-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.option-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 14px;
+  background: #111827;
+}
+
+.notice,
+.summary {
+  margin: 18px 0;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(30, 41, 59, 0.95);
+}
+
+.muted {
+  color: #94a3b8;
+}
+
+.dashboard-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+}
+
+tbody tr {
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+td,
+th {
+  text-align: left;
+  padding: 10px 8px;
+}
+
+th {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.status {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+}
+
+.status.build { background: rgba(38, 166, 154, 0.16); color: #5eead4; }
+.status.pivot { background: rgba(251, 191, 36, 0.16); color: #fbbf24; }
+.status.kill { background: rgba(248, 113, 113, 0.16); color: #f87171; }
+.status.keep_collecting { background: rgba(96, 165, 250, 0.16); color: #93c5fd; }
+
+.pricing-page {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pricing-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pricing-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.pricing-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  margin-bottom: 60px;
+}
+
+.pricing-card {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pricing-card.featured {
+  border-color: rgba(96, 165, 250, 0.5);
+  background: rgba(30, 41, 59, 0.95);
+}
+
+.pricing-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.price .amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.price .period {
+  color: #94a3b8;
+  font-size: 1rem;
+}
+
+.price .annual {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.feature-list li {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.button.primary { background: #3b82f6; }
+.button.secondary { background: rgba(148, 163, 184, 0.24); color: #e2e8f0; }
+
+.pricing-faq {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 24px;
+  padding: 40px;
+}
+
+.pricing-faq h2 {
+  margin-top: 0;
+}
+
+.pricing-faq dl {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.pricing-faq dt {
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 6px;
+}
+
+.pricing-faq dd {
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.settings-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.settings-container {
+  padding: 24px;
+}
+
+.settings-container h1 {
+  margin-top: 0;
+}
+
+.notice {
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.notice.success {
+  background: rgba(38, 166, 154, 0.16);
+  border-color: rgba(94, 234, 212, 0.5);
+  color: #5eead4;
+}
+
+.settings-panel {
+  background: rgba(30, 41, 59, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.settings-panel h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+.settings-panel h3 {
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.settings-panel dl {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.settings-panel dt {
+  font-weight: 600;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.settings-panel dd {
+  margin: 0;
+  color: #e2e8f0;
+}
+
+.inline-form {
+  margin-bottom: 10px;
+}
+
+.settings-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    padding: 16px;
+  }
+  .pricing-card { padding: 24px; }
+  .pricing-faq { padding: 24px; }
+}

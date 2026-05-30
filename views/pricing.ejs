@@ -1,0 +1,75 @@
+<%- include('partials/header', { title: 'Pricing' }) %>
+<section class="pricing-page">
+  <div class="pricing-hero">
+    <h1>Simple, transparent pricing</h1>
+    <p>Start free. Upgrade when you need more projects, signups, and features.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <% Object.entries(tiers).forEach(([tierKey, tier]) => { %>
+      <div class="pricing-card <%= tierKey === 'free' ? 'featured' : '' %>">
+        <h2><%= tier.name %></h2>
+        <div class="price">
+          <% if (tier.price_monthly === 0) { %>
+            <span class="amount">Free</span>
+          <% } else { %>
+            <span class="amount">$<%= tier.price_monthly %></span><span class="period">/mo</span>
+            <div class="annual">or $<%= tier.price_annual %>/year</div>
+          <% } %>
+        </div>
+
+        <ul class="feature-list">
+          <li><strong><%= tier.features.max_projects %></strong> <%= tier.features.max_projects === 1 ? 'project' : 'projects' %></li>
+          <li><strong><%= tier.features.max_signups.toLocaleString() %></strong> signups</li>
+          <% if (tier.features.referrals) { %>
+            <li>✓ Referral leaderboards</li>
+          <% } %>
+          <% if (tier.features.validation_questions) { %>
+            <li>✓ Validation questions</li>
+          <% } %>
+          <% if (tier.features.price_ab_testing) { %>
+            <li>✓ Price A/B testing</li>
+          <% } %>
+          <% if (tier.features.custom_domain) { %>
+            <li>✓ Custom domain</li>
+          <% } %>
+          <% if (tier.features.csv_export) { %>
+            <li>✓ CSV export</li>
+          <% } %>
+          <% if (tier.features.webhooks) { %>
+            <li>✓ Webhooks</li>
+          <% } %>
+          <% if (tier.features.api_access) { %>
+            <li>✓ API access</li>
+          <% } %>
+        </ul>
+
+        <a class="button <%= tierKey === 'free' ? 'primary' : 'secondary' %>" href="/pricing#contact">
+          <% if (tierKey === 'free') { %>
+            Start free
+          <% } else { %>
+            Upgrade
+          <% } %>
+        </a>
+      </div>
+    <% }) %>
+  </div>
+
+  <div class="pricing-faq">
+    <h2>FAQ</h2>
+    <dl>
+      <dt>Can I change plans anytime?</dt>
+      <dd>Yes. Upgrade or downgrade at any time. Changes take effect immediately.</dd>
+      
+      <dt>What happens if I exceed my signup limit?</dt>
+      <dd>We'll notify you. You can upgrade to a higher tier, or we'll pause new signups until your next billing cycle.</dd>
+      
+      <dt>Is there a setup fee?</dt>
+      <dd>No setup fee. Just a simple monthly or annual subscription.</dd>
+      
+      <dt>Do you offer discounts for annual billing?</dt>
+      <dd>Yes. Annual plans save you ~20% vs. monthly billing.</dd>
+    </dl>
+  </div>
+</section>
+<%- include('partials/footer') %>

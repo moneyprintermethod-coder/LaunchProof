@@ -1,0 +1,31 @@
+<%- include('partials/header', { title: 'Pick validation questions' }) %>
+<section class="card">
+  <h1>Pick your validation questions</h1>
+  <p>Choose up to 3 questions for visitors to answer on the public waitlist page.</p>
+  <form action="/startup/<%= startup.id %>/questions" method="post" class="form-grid">
+    <div>
+      <% questionTemplates.forEach((question) => { %>
+        <div class="checkbox-field">
+          <label>
+            <input type="checkbox" name="validation_questions" value="<%= question.id %>" <%= startup.validation_questions.some((q) => q.id === question.id) ? 'checked' : '' %> />
+            <strong><%= question.question %></strong>
+            <div class="small"><%= question.type %></div>
+          </label>
+        </div>
+      <% }) %>
+    </div>
+
+    <label>
+      Price test variants (optional)
+      <input type="text" name="price_test_variants" placeholder="9, 19, 39" value="<%= startup.price_test_variants.join(', ') %>" />
+    </label>
+
+    <label>
+      Minimum signups for verdict
+      <input type="number" name="min_signups_for_verdict" min="10" value="<%= startup.min_signups_for_verdict || 50 %>" />
+    </label>
+
+    <button type="submit">Save questions and publish</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

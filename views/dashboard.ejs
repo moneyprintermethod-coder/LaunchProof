@@ -1,0 +1,74 @@
+<%- include('partials/header', { title: 'Dashboard' }) %>
+<section class="dashboard-grid">
+  <div class="card verdict-card">
+    <h1>Verdict: <span class="status <%= stats.recommendation %>"><%= stats.recommendation.replace('_', ' ').toUpperCase() %></span></h1>
+    <p><%= stats.reasoning %></p>
+    <ul>
+      <li><strong><%= stats.total_signups %></strong> signups</li>
+      <li><strong><%= stats.high_intent_pct.toFixed(1) %>%</strong> high intent</li>
+      <li><strong>$<%= stats.avg_willingness_to_pay %></strong> avg willingness to pay</li>
+      <li><strong><%= stats.spam_pct.toFixed(1) %>%</strong> spam / low quality</li>
+    </ul>
+    <div class="actions">
+      <a class="button" href="/startup/<%= startup.id %>/live">Share public page</a>
+      <a class="button secondary" href="/startup/<%= startup.id %>/settings">Settings & billing</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Intent breakdown</h2>
+    <dl>
+      <dt>High intent</dt>
+      <dd><%= stats.intent_bands.high %></dd>
+      <dt>Medium intent</dt>
+      <dd><%= stats.intent_bands.medium %></dd>
+      <dt>Low intent</dt>
+      <dd><%= stats.intent_bands.low %></dd>
+      <dt>Spam</dt>
+      <dd><%= stats.intent_bands.spam %></dd>
+    </dl>
+  </div>
+
+  <div class="card">
+    <h2>Price test performance</h2>
+    <% if (stats.variant_results.length) { %>
+      <table>
+        <thead><tr><th>Price</th><th>Conversion rate</th><th>Responses</th></tr></thead>
+        <tbody>
+          <% stats.variant_results.forEach((variant) => { %>
+            <tr>
+              <td>$<%= variant.price %></td>
+              <td><%= (variant.rate * 100).toFixed(0) %>%</td>
+              <td><%= variant.count %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No price test data yet.</p>
+    <% } %>
+  </div>
+
+  <div class="card full-width">
+    <h2>Recent signups</h2>
+    <% if (entries.length) { %>
+      <table>
+        <thead><tr><th>Email</th><th>Intent</th><th>WTP</th><th>Price variant</th><th>Signed up</th></tr></thead>
+        <tbody>
+          <% entries.slice(0, 10).forEach((entry) => { %>
+            <tr>
+              <td><%= entry.email %></td>
+              <td><%= entry.signal_quality %> (<%= entry.intent_score %>)</td>
+              <td>$<%= entry.willingness_to_pay %></td>
+              <td><%= entry.price_variant_shown != null ? startup.price_test_variants[entry.price_variant_shown] : '-' %></td>
+              <td><%= entry.created_at %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No signups yet. Share your page and start collecting responses.</p>
+    <% } %>
+  </div>
+</section>
+<%- include('partials/footer') %>
