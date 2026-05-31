@@ -43,7 +43,21 @@ Open `http://localhost:3000` → Enter your idea → Share public URL → Monito
 
 ## Deployment
 
-### Docker
+### Railway (Recommended)
+
+Railway auto-deploys on every push to `main` branch.
+
+**Setup:**
+
+1. Create a [Railway.app](https://railway.app) account (sign up with GitHub)
+2. New Project → Deploy from GitHub repo → select `LaunchProof`
+3. Railway auto-detects the `Dockerfile` and `railway.json` config
+4. Add environment variable: `NODE_ENV=production`
+5. Click "Deploy" — your app is live in ~2 minutes
+
+**Result:** Public URL assigned (e.g., `launchproof-prod.railway.app`). Every `git push origin main` triggers auto-deploy.
+
+### Docker (Local)
 
 Build and run the app using Docker:
 
@@ -61,9 +75,9 @@ heroku create
 git push heroku main
 ```
 
-### GitHub Actions
+### CI/CD
 
-A basic CI workflow is included in `.github/workflows/ci.yml` to install dependencies and validate the server on push.
+A GitHub Actions workflow in `.github/workflows/ci.yml` validates syntax and lints code on every push and pull request to `main`.
 
 ## Database Schema
 
